@@ -1,5 +1,5 @@
 {
-  "name": "logistic",
+  "name": "parcelflow-api",
   "version": "1.0.0",
   "description": "API para gerenciamento de encomendas",
   "main": "index.js",
