@@ -29,6 +29,8 @@ model User {
   createdAt  DateTime   @default(now()) @map("created_at")
   updatedAt  DateTime   @default(now()) @map("updated_at")
   deliveries Delivery[]
+
+  @@map("users")
 }
 
 model Delivery {
