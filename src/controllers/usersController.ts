@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { z } from 'zod';
 import { hashPassword } from '@/utils/hashPassword';
 import { prisma } from '../database/prisma';
+import { AppError } from '@/utils/AppError';
 
 class UserController {
   async create(request: Request, response: Response) {
@@ -32,6 +33,13 @@ class UserController {
     });
 
     return response.status(201).json(user);
+  }
+
+  async index(request: Request, response: Response) {
+    const users = await prisma.user.findMany();
+    if (!users) throw new AppError('Users Not Found');
+
+    response.status(200).json({ users });
   }
 }
 
