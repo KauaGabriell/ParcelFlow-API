@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { AppError } from '@/utils/AppError';
 import z, { ZodError } from 'zod';
+import { Prisma } from '@/generated/prisma/client';
 
 export function errorHandling(
   error: any,
@@ -16,6 +17,13 @@ export function errorHandling(
     return response
       .status(400)
       .json({ message: 'validation error', issues: z.treeifyError(error) });
+  }
+
+  if (
+    error instanceof Prisma.PrismaClientKnownRequestError &&
+    error.code === 'P2002'
+  ) {
+    return response.status(409).json({ message: 'Duplicate Recurse' });
   }
 
   return response.status(500).json({ message: error.message });
