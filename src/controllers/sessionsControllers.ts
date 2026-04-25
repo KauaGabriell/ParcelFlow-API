@@ -1,8 +1,10 @@
+import { AppError } from '@/utils/AppError';
 import { Request, Response } from 'express';
 import { prisma } from '../database/prisma';
 import { z } from 'zod';
 import { comparePassword } from '@/utils/hashPassword';
-import { AppError } from '@/utils/AppError';
+import { authConfig } from '@/configs/auth';
+import { sign } from 'jsonwebtoken';
 
 class SessionController {
   async create(request: Request, response: Response) {
@@ -18,7 +20,13 @@ class SessionController {
 
     await comparePassword(password, user.password);
 
-    return response.json({ message: 'ok' });
+    const { secret, expiresIn } = authConfig.jwt;
+    const token = sign({ role: user.role ?? 'customer' }, secret, {
+      subject: user.id,
+      expiresIn,
+    });
+
+    return response.json({ token });
   }
 }
 
