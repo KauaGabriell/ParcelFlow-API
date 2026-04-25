@@ -31,7 +31,7 @@ class UserController {
       },
     });
 
-    return response.json(user);
+    return response.status(201).json(user);
   }
 }
 
