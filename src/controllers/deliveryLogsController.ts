@@ -31,6 +31,31 @@ class DeliveryLogsController {
 
     return response.json({ message: 'ok' });
   }
+
+  async show(request: Request, response: Response, next: NextFunction) {
+    const paramsSchema = z.object({
+      id: z.uuid(),
+    });
+
+    const { id } = paramsSchema.parse(request.params);
+
+    const delivery = await prisma.delivery.findFirst({
+      where: { id },
+      include: {
+        user: { select: { name: true, email: true } },
+        logs: { orderBy: { createdAt: 'desc' } },
+      },
+    });
+
+    if (!delivery) throw new AppError('Delivery Not Found', 404);
+    if (
+      request.user?.role === 'customer' &&
+      request.params.id !== delivery.userId
+    )
+      throw new AppError('The user can only view their deliveries', 404);
+
+    return response.status(200).json(delivery);
+  }
 }
 
 export { DeliveryLogsController };
