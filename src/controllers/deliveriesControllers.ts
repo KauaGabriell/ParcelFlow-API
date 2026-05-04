@@ -21,6 +21,18 @@ class DeliveriesController {
 
     response.status(201).json(delivery);
   }
+
+  async index(request: Request, response: Response, next: NextFunction) {
+    const deliveries = await prisma.delivery.findMany({
+      include: {
+        user: { select: { name: true, email: true } },
+      },
+    });
+
+    if (!deliveries) throw new AppError('Deliveries Not Found', 400);
+
+    return response.status(200).json(deliveries);
+  }
 }
 
 export { DeliveriesController };
