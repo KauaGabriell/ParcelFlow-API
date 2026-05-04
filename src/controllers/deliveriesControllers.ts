@@ -33,6 +33,28 @@ class DeliveriesController {
 
     return response.status(200).json(deliveries);
   }
+
+  async statusUpdate(request: Request, response: Response, next: NextFunction) {
+    const paramsSchema = z.object({
+      id: z.uuid(),
+    });
+
+    const bodySchema = z.object({
+      status: z.enum(['processing', 'shipped', 'delivered']),
+    });
+
+    const { id } = paramsSchema.parse(request.params);
+    const { status } = bodySchema.parse(request.body);
+
+    await prisma.delivery.update({
+      where: { id },
+      data: {
+        status: status,
+      },
+    });
+
+    return response.status(200).json({ message: 'Update successful' });
+  }
 }
 
 export { DeliveriesController };

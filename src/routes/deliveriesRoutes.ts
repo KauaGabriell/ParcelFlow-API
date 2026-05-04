@@ -12,5 +12,6 @@ deliveriesRoutes.use(verifyAuthorizationUser(['sale']));
 
 deliveriesRoutes.post('/', deliveriesController.create);
 deliveriesRoutes.get('/', deliveriesController.index);
+deliveriesRoutes.patch('/:id/status', deliveriesController.statusUpdate);
 
 export { deliveriesRoutes };
