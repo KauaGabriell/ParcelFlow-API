@@ -4,7 +4,8 @@
   "description": "API para gerenciamento de encomendas",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --watch --runInBand",
+    "test:ci": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --runInBand",
     "dev": "tsx --watch --env-file .env src/server.ts"
   },
   "keywords": [],
@@ -27,11 +28,13 @@
     "@types/jest": "^30.0.0",
     "@types/node": "^25.6.0",
     "@types/supertest": "^7.2.0",
+    "cross-env": "^10.1.0",
     "dotenv": "^17.4.2",
     "jest": "^30.3.0",
     "prisma": "^7.8.0",
     "supertest": "^7.2.2",
     "ts-jest": "^29.4.9",
+    "ts-node": "^10.9.2",
     "tsx": "^4.21.0",
     "typescript": "^6.0.3"
   }

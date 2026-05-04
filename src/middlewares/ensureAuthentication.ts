@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { AppError } from '@/utils/AppError';
-import { verify } from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 import { authConfig } from '@/configs/auth';
 
 interface TokenPayload {
@@ -18,7 +18,7 @@ function ensureAuthentication(
 
   const [, token] = headers.split(' ');
   try {
-    const { role, sub: user_id } = verify(
+    const { role, sub: user_id } = jwt.verify(
       token,
       authConfig.jwt.secret,
     ) as TokenPayload;
