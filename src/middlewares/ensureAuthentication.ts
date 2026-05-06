@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
-import { AppError } from '@/utils/AppError';
+import { AppError } from '../utils/AppError.js';
 import jwt from 'jsonwebtoken';
-import { authConfig } from '@/configs/auth';
+import { authConfig } from '../configs/auth.js';
 
 interface TokenPayload {
   role: string;

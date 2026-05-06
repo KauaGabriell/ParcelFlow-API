@@ -1,5 +1,5 @@
-import { prisma } from '@/database/prisma';
-import { AppError } from '@/utils/AppError';
+import { prisma } from '../database/prisma.js';
+import { AppError } from '../utils/AppError.js';
 import { Request, Response, NextFunction } from 'express';
 import { z } from 'zod';
 

@@ -2,11 +2,14 @@
   "name": "parcelflow-api",
   "version": "1.0.0",
   "description": "API para gerenciamento de encomendas",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --watch --runInBand",
     "test:ci": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --runInBand",
-    "dev": "tsx --watch --env-file .env src/server.ts"
+    "dev": "tsx --watch --env-file .env src/server.ts",
+    "build": "tsc && tsc-alias",
+    "start": "node build/server.js"
   },
   "keywords": [],
   "author": "Kauã Gabriell",
@@ -35,6 +38,7 @@
     "supertest": "^7.2.2",
     "ts-jest": "^29.4.9",
     "ts-node": "^10.9.2",
+    "tsc-alias": "^1.8.17",
     "tsx": "^4.21.0",
     "typescript": "^6.0.3"
   }

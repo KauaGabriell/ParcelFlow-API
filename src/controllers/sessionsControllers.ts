@@ -1,9 +1,9 @@
-import { AppError } from '@/utils/AppError';
+import { AppError } from '../utils/AppError.js';
 import { Request, Response } from 'express';
-import { prisma } from '../database/prisma';
+import { prisma } from '../database/prisma.js';
 import { z } from 'zod';
-import { comparePassword } from '@/utils/hashPassword';
-import { authConfig } from '@/configs/auth';
+import { comparePassword } from '../utils/hashPassword.js';
+import { authConfig } from '../configs/auth.js';
 import jwt from 'jsonwebtoken';
 
 class SessionController {

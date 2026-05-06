@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import { AppError } from './AppError';
+import { AppError } from './AppError.js';
 
 export async function hashPassword(password: string) {
   const rounds = 12;

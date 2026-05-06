@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
-import { AppError } from '@/utils/AppError';
+import { AppError } from '../utils/AppError.js';
 import z, { ZodError } from 'zod';
-import { Prisma } from '@/generated/prisma/client';
+import { Prisma } from '../generated/prisma/client.js';
 
 export function errorHandling(
   error: any,

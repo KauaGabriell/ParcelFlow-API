@@ -4,18 +4,21 @@
     "lib": [
       "ES2023"
     ],
-    "paths": {
-      "@/*": [
-        "./src/*"
-      ]
-    },
-    "module": "node16",
-    "moduleResolution": "node16",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
     "isolatedModules": true,
-    "types": ["node", "jest"],
+    "types": [
+      "node",
+      "jest"
+    ],
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "skipLibCheck": true
-  }
+    "skipLibCheck": true,
+    "outDir": "build",
+    "rootDir": "src"
+  },
+  "include": [
+    "src"
+  ]
 }

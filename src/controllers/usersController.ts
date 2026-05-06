@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
 import { z } from 'zod';
-import { hashPassword } from '@/utils/hashPassword';
-import { prisma } from '../database/prisma';
-import { AppError } from '@/utils/AppError';
+import { hashPassword } from '../utils/hashPassword.js';
+import { prisma } from '../database/prisma.js';
+import { AppError } from '../utils/AppError.js';
 
 class UserController {
   async create(request: Request, response: Response) {

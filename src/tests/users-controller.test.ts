@@ -1,6 +1,6 @@
 import request from 'supertest';
-import { app } from '@/app';
-import { prisma } from '@/database/prisma';
+import { app } from '../app.js';
+import { prisma } from '../database/prisma.js';
 
 describe('UsersController', () => {
   const createdUserIds: string[] = [];
@@ -43,10 +43,12 @@ describe('SessionsController', () => {
   const createdUserIds: string[] = [];
 
   it('Should return 401 when trying to authenticate with unavailable email', async () => {
-    const response = await request(app).post('/sessions').send({
-      email: `unavailable+${Date.now()}@gmail.com`,
-      password: 'password123',
-    });
+    const response = await request(app)
+      .post('/sessions')
+      .send({
+        email: `unavailable+${Date.now()}@gmail.com`,
+        password: 'password123',
+      });
 
     expect(response.status).toBe(401);
     expect(response.body.message).toBe('Invalid Credentials');
