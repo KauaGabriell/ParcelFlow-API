@@ -1,5 +1,5 @@
 # Use Node.js official image
-FROM node:18-alpine AS base
+FROM node:20-alpine AS base
 
 # Install pnpm
 RUN npm install -g pnpm
@@ -8,10 +8,10 @@ RUN npm install -g pnpm
 WORKDIR /app
 
 # Copy package files
-COPY package.json pnpm-lock.yaml ./
+COPY package.json package-lock.json ./
 
 # Install dependencies
-RUN pnpm install --frozen-lockfile --prod
+RUN npm install --frozen-lockfile --prod
 
 # Production stage
 FROM base AS production
