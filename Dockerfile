@@ -1,9 +1,6 @@
 # Use Node.js official image
 FROM node:20-alpine AS base
 
-# Install pnpm
-RUN npm install -g pnpm
-
 # Set working directory
 WORKDIR /app
 
@@ -11,7 +8,7 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 
 # Install dependencies
-RUN npm install --frozen-lockfile --prod
+RUN npm install --omit=dev
 
 # Production stage
 FROM base AS production
